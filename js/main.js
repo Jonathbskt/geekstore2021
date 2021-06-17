@@ -68,6 +68,8 @@ class Product {
     }
 }
 
+
+
 for (const productos of datosProducts) {
     $("#listadoProduct").append(`<div class="col">
                         <div class="card h-100">
@@ -77,7 +79,7 @@ for (const productos of datosProducts) {
                                 <p id="price"> $${productos.precioProducto}</p>
                                 
                                 <div class="addCarrito ">
-                                    <a href="#"> <i class="fas fa-shopping-cart"></i></a>
+                                    <a href="#" id="shopingCartClick"> <i class="fas fa-shopping-cart"></i></a>
                                 </div>
                             </div>
                         </div>
@@ -107,8 +109,9 @@ class UI {
 
         productList.appendChild(element);
         this.resetForm();
+        
     }
-
+ 
     resetForm() {
         document.getElementById('product-form').reset();
     }
@@ -125,6 +128,25 @@ class UI {
             document.querySelector('.alert').remove();
         }, 3000)
     }
+}
+
+class AddCart {
+    AddShopingCart(product) {
+
+        
+        $(".tablee").append(`<tr id="tableCart">
+        <th scope="row"><img class="shopingCartImagen" src="./img/Componentes/20190701164849599e86367b2db80a0694c3e4bb2764295e_src.jpg" alt=""></th>
+
+        <td class="shopingCartParrafo">${product.nombreProducto}</td>
+
+        <td><input type="number" class="form-control mb-3" id="shoppingCartCantidad" value="1"></td>
+
+        <td><p class="p-3" id="price2">$${product.precioProducto}</p></td>
+
+        </tr>`)
+    }
+    
+
 }
 
 //CLICK BOTON SUBIR
@@ -144,8 +166,10 @@ document.getElementById('product-form').addEventListener('submit',function(event
 
     ui.agregarProducto(product);
     
+    
     ui.showMessage('Producto agregado satisfactoriamente', 'alert alert-success');
-    console.log(categoriaProducto)
+
+    sessionStorage.setItem("product", JSON.stringify(product));
 }   
 )
 
@@ -165,14 +189,18 @@ document.getElementById("loguearme").addEventListener("click", function () {
         })
         $(".component-menu-lateral-admin").removeClass("hidden-card")
         $(".component-menu-lateral-admin").addClass("visible-card")
+        
     }else if(document.getElementById("emailLogin").value === usuario && document.getElementById("passwordLogin").value === passwordUsuario) 
     {
         Swal.fire(
         {
             title: "Bienvenido User!"
             
-        })
+        })      	
+         
+
     }
+
     else {
         Swal.fire(
         {
@@ -181,5 +209,24 @@ document.getElementById("loguearme").addEventListener("click", function () {
     }})
 
 
+// SHOPPING CART CLICK
 
+   
+$("#shopingCartClick").click(function() {
+    
+    let nombreProducto = document.getElementById("nombreProducto").value
+    let precioProducto = document.getElementById("precioProducto").value
+    let categoriaProducto = document.getElementById("categoriaProducto").value
+
+    const uiCart = new AddCart();
+    const product = new Product(nombreProducto, precioProducto, categoriaProducto);
+    
+
+    uiCart.AddShopingCart(product);
+    
+    
+ 
+    
+
+});
 
