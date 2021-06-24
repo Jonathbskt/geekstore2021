@@ -52,8 +52,8 @@ let btnSubir = document.getElementById("subirCard");
 // VARIABLES DATOS - LLAMADO A LOS IMPUTS PARA ADMINISTADOR 
 const nombreProducto = document.querySelector(".nameProduct")
 const precioProducto = document.querySelector(".price") 
-const imagenProducto = document.querySelector(".imagenCard")
-const categoriaProducto = document.querySelector("categoriaProducto") 
+const thumbnailUrl = document.querySelector(".imagenCard")
+//const categoriaProducto = document.querySelector("categoriaProducto") 
 
 
 // CONSTRUCTOR
@@ -138,7 +138,8 @@ class AddCart {
     AddShopingCart(productos) {
 
         $(".tablee").append(`<tr id="tableCart">
-        <th scope="row"><img class="shopingCartImagen " src="${productos.thumbnailUrl}" alt=""></th>
+
+        <th scope="row"><img class="shopingCartImagen" src="${productos.thumbnailUrl}" alt=""></th>
 
         <td class="shopingCartParrafo">${productos.nombreProducto}</td>
 
@@ -147,9 +148,10 @@ class AddCart {
         <td><p class="p-3 price2">${productos.precioProducto}</p></td>
 
         </tr>`)
-        
+
     }
 }
+
 
 //CLICK BOTON SUBIR - LLAMA A LOS IMPUTS ADMINISTRADOR
 
@@ -223,18 +225,18 @@ document.getElementById("loguearme").addEventListener("click", function () {
    
 $(".shopingCartClick").click(function() {
     
-    const imagenProducto = document.querySelector(".imagenCard")
+    const thumbnailUrl = document.querySelector(".imagenCard").src
     const nombreProducto = document.querySelector(".nameProduct").textContent
     const precioProducto = document.querySelector(".price").textContent
 
-    const product = new Product(nombreProducto, precioProducto,imagenProducto);
+    const product = new Product(nombreProducto, precioProducto,thumbnailUrl);
     const uiCart = new AddCart();
     
     uiCart.AddShopingCart(product);
-    console.log(product.nombreProducto, )
-    
- 
-    
 
+
+     
+    console.log(thumbnailUrl)
+    
 });
 
