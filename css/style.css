@@ -172,14 +172,14 @@ p {
   font-size: 15px;
 }
 
-#price {
+.price {
   color: #ffc821;
   font-weight: 600;
   margin-top: 0px;
   font-size: 22px;
 }
 
-#price2 {
+.price2 {
   color: #ffc821;
   font-weight: 600;
   margin-top: 0px;

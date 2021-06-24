@@ -1,7 +1,7 @@
 
 //DATOS 
 
- var datosProducts = [
+ const datosProducts = [
   {
     "id":1 ,
     "nombreProducto": "Auriculares HyperX Cloud Stinger Core 7.1",
@@ -41,29 +41,31 @@
     "categoria" : "Componentes",
     "categoriaProducto": "Placas de video",
     "thumbnailUrl": "./img/Componentes/geforce.jpg"
-  },
+  }
 
 ]
+ 
 
 // BTN SUBIR PRODUCTO
 let btnSubir = document.getElementById("subirCard");
 
-// VARIABLES DATOS
-let nombreProducto = document.getElementById("nombreProducto")
-let precioProducto = document.getElementById("precioProducto") 
-let categoriaProducto = document.getElementById("categoriaProducto") 
+// VARIABLES DATOS - LLAMADO A LOS IMPUTS PARA ADMINISTADOR 
+const nombreProducto = document.querySelector(".nameProduct")
+const precioProducto = document.querySelector(".price") 
+const imagenProducto = document.querySelector(".imagenCard")
+const categoriaProducto = document.querySelector("categoriaProducto") 
 
 
 // CONSTRUCTOR
 
 class Product {
-    constructor(nombreProducto, precioProducto, categoriaProducto, categoria, thumnnairUrl) {
+    constructor(nombreProducto, precioProducto, categoriaProducto, categoria, thumbnailUrl) {
         
         this.nombreProducto = nombreProducto;
         this.precioProducto = precioProducto;
         this.categoriaProducto = categoriaProducto;
         this.categoria = categoria;
-        this.thumnnairUrl = thumnnairUrl;
+        this.thumbnailUrl = thumbnailUrl;
 
     }
 }
@@ -73,35 +75,37 @@ class Product {
 for (const productos of datosProducts) {
     $("#listadoProduct").append(`<div class="col">
                         <div class="card h-100">
-                            <img src="${productos.thumbnailUrl}" class="card-img-top" alt="...">
+                            <img src="${productos.thumbnailUrl}" class="card-img-top imagenCard" alt="...">
                             <div class="card-body bg-light">
-                                <h5 class="card-title "> ${productos.nombreProducto}</h5>
-                                <p id="price"> $${productos.precioProducto}</p>
+                                <h5 class="card-title nameProduct" > ${productos.nombreProducto}</h5>
+                                <p class="price"> $${productos.precioProducto}</p>
                                 
                                 <div class="addCarrito ">
-                                    <a href="#" id="shopingCartClick"> <i class="fas fa-shopping-cart"></i></a>
+                                    <a href="#" class="shopingCartClick"  > <i class="fas fa-shopping-cart"></i></a>
                                 </div>
                             </div>
                         </div>
                     </div> `);
+
+                    
     }
 
 // CLASS UI - CARD DINAMICA
 
 class UI {
-    agregarProducto(product) {
+    agregarProducto(productos) {
         const productList = document.getElementById('listadoProduct');
         const element = document.createElement('div');
 
         element.innerHTML = `<div class="col">
                         <div class="card h-100">
-                            <img src="./img/Perifericos/auris1.jpg" class="card-img-top" alt="...">
+                            <img src="./img/Perifericos/auris1.jpg" class="card-img-top imagenCard" alt="...">
                             <div class="card-body bg-light">
-                                <h5 class="card-title "> ${product.nombreProducto}</h5>
-                                <p id="price"> $${product.precioProducto}</p>
+                                <h5 class="card-title nameProduct"> ${productos.nombreProducto}</h5>
+                                <p class="price"> $${productos.precioProducto}</p>
                                 
                                 <div class="addCarrito ">
-                                    <a href="#"> <i class="fas fa-shopping-cart"></i></a>
+                                    <a href="#" > <i class="fas fa-shopping-cart shopingCartClick "></i></a>
                                 </div>
                             </div>
                         </div>
@@ -131,25 +135,23 @@ class UI {
 }
 
 class AddCart {
-    AddShopingCart(product) {
+    AddShopingCart(productos) {
 
-        
         $(".tablee").append(`<tr id="tableCart">
-        <th scope="row"><img class="shopingCartImagen" src="./img/Componentes/20190701164849599e86367b2db80a0694c3e4bb2764295e_src.jpg" alt=""></th>
+        <th scope="row"><img class="shopingCartImagen " src="${productos.thumbnailUrl}" alt=""></th>
 
-        <td class="shopingCartParrafo">${product.nombreProducto}</td>
+        <td class="shopingCartParrafo">${productos.nombreProducto}</td>
 
         <td><input type="number" class="form-control mb-3" id="shoppingCartCantidad" value="1"></td>
 
-        <td><p class="p-3" id="price2">$${product.precioProducto}</p></td>
+        <td><p class="p-3 price2">${productos.precioProducto}</p></td>
 
         </tr>`)
+        
     }
-    
-
 }
 
-//CLICK BOTON SUBIR
+//CLICK BOTON SUBIR - LLAMA A LOS IMPUTS ADMINISTRADOR
 
 document.getElementById('product-form').addEventListener('submit',function(event) {
     event.preventDefault();
@@ -165,7 +167,7 @@ document.getElementById('product-form').addEventListener('submit',function(event
     }
 
     ui.agregarProducto(product);
-    
+
     
     ui.showMessage('Producto agregado satisfactoriamente', 'alert alert-success');
 
@@ -190,6 +192,8 @@ document.getElementById("loguearme").addEventListener("click", function () {
         $(".component-menu-lateral-admin").removeClass("hidden-card")
         $(".component-menu-lateral-admin").addClass("visible-card")
         
+        
+
     }else if(document.getElementById("emailLogin").value === usuario && document.getElementById("passwordLogin").value === passwordUsuario) 
     {
         Swal.fire(
@@ -206,24 +210,28 @@ document.getElementById("loguearme").addEventListener("click", function () {
         {
             title: "Email y/o contraseña incorrectos",
         })
-    }})
+    }
+
+   
+})
 
 
 // SHOPPING CART CLICK
 
+
+
    
-$("#shopingCartClick").click(function() {
+$(".shopingCartClick").click(function() {
     
-    let nombreProducto = document.getElementById("nombreProducto").value
-    let precioProducto = document.getElementById("precioProducto").value
-    let categoriaProducto = document.getElementById("categoriaProducto").value
+    const imagenProducto = document.querySelector(".imagenCard")
+    const nombreProducto = document.querySelector(".nameProduct").textContent
+    const precioProducto = document.querySelector(".price").textContent
 
+    const product = new Product(nombreProducto, precioProducto,imagenProducto);
     const uiCart = new AddCart();
-    const product = new Product(nombreProducto, precioProducto, categoriaProducto);
     
-
     uiCart.AddShopingCart(product);
-    
+    console.log(product.nombreProducto, )
     
  
     
