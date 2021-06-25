@@ -164,6 +164,16 @@ p {
   align-items: center;
 }
 
+.removeCarrito {
+  background: transparent;
+  font-size: 25px;
+  border: none;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .addCarrito a:hover {
   color: #fff;
 }
@@ -223,7 +233,7 @@ p {
   height: 100px;
 }
 .offcanvas-end {
-  width: 500px;
+  width: 600px;
 }
 
 .shopingCartImagen {

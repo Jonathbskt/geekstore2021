@@ -46,8 +46,7 @@
 ]
  
 
-// BTN SUBIR PRODUCTO
-let btnSubir = document.getElementById("subirCard");
+
 
 // VARIABLES DATOS - LLAMADO A LOS IMPUTS PARA ADMINISTADOR 
 const nombreProducto = document.querySelector(".nameProduct")
@@ -114,6 +113,7 @@ class UI {
         productList.appendChild(element);
         this.resetForm();
         
+        
     }
  
     resetForm() {
@@ -131,21 +131,27 @@ class UI {
         setTimeout(function() {
             document.querySelector('.alert').remove();
         }, 3000)
+        
+
+        
     }
 }
 
+//CUIDADO, AGREGUÉ IMAGEN ESTATICA 
 class AddCart {
     AddShopingCart(productos) {
 
         $(".tablee").append(`<tr id="tableCart">
 
-        <th scope="row"><img class="shopingCartImagen" src="${productos.thumbnailUrl}" alt=""></th>
+        <th scope="row"><img class="shopingCartImagen" src="/img/Perifericos/auris1.jpg" alt=""></th> 
 
         <td class="shopingCartParrafo">${productos.nombreProducto}</td>
 
         <td><input type="number" class="form-control mb-3" id="shoppingCartCantidad" value="1"></td>
 
-        <td><p class="p-3 price2">${productos.precioProducto}</p></td>
+        <td><p class="p-3 price2">${productos.precioProducto}</p>  </td>
+        <td> <button class="removeCarrito"> <i class="fas fa-trash-alt"></i> </button> </td>
+
 
         </tr>`)
 
@@ -174,6 +180,8 @@ document.getElementById('product-form').addEventListener('submit',function(event
     ui.showMessage('Producto agregado satisfactoriamente', 'alert alert-success');
 
     sessionStorage.setItem("product", JSON.stringify(product));
+
+    
 }   
 )
 
@@ -224,7 +232,6 @@ document.getElementById("loguearme").addEventListener("click", function () {
 
    
 $(".shopingCartClick").click(function() {
-    
     const thumbnailUrl = document.querySelector(".imagenCard").src
     const nombreProducto = document.querySelector(".nameProduct").textContent
     const precioProducto = document.querySelector(".price").textContent
@@ -237,6 +244,11 @@ $(".shopingCartClick").click(function() {
 
      
     console.log(thumbnailUrl)
-    
+
+    $(".removeCarrito").click(function() {
+
+    $("#tableCart").fadeOut('slow')
+    })
+
 });
 
