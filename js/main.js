@@ -1,3 +1,8 @@
+// VARIABLES DATOS - LLAMADO A LOS IMPUTS PARA ADMINISTADOR 
+const nombreProducto = document.querySelector(".nameProduct")
+const precioProducto = document.querySelector(".price")
+const thumbnailUrl = document.querySelector(".imagenCard")
+//const categoriaProducto = document.querySelector("categoriaProducto") 
 
 //DATOS 
 
@@ -14,8 +19,9 @@ window.onload = function () {
 
             let datosProducts = JSON.parse(this.responseText);
             for (const productos of datosProducts) {
-                $("#listadoProduct").append(`<div class="col">
+                $("#listadoProduct").append(`<div class="col colItem">
                         <div class="card h-100">
+                            
                             <img src="${productos.thumbnailUrl}" class="card-img-top imagenCard" alt="...">
                             <div class="card-body bg-light">
                                 <h5 class="card-title nameProduct" > ${productos.nombreProducto}</h5>
@@ -29,58 +35,57 @@ window.onload = function () {
                     </div> `);
             }
 
-            $(".shopingCartClick").click(function () {
-                const thumbnailUrl = document.querySelector(".imagenCard").src
-                const nombreProducto = document.querySelector(".nameProduct").textContent
-                const precioProducto = document.querySelector(".price").textContent
+            // SHOPPING CART CLICK - AGREGAR AL CARRITO 
 
-                const product = new Product(nombreProducto, precioProducto, thumbnailUrl);
-                const uiCart = new AddCart();
+            const addToShopingCartButtons = document.querySelectorAll('.shopingCartClick'); {
+                addToShopingCartButtons.forEach(addToCartButton => {
+                    addToCartButton.addEventListener('click', addToCartCliked);
+                });
+            }
 
-                uiCart.AddShopingCart(product);
+            function addToCartCliked(event) {
+                const button = event.target;
+                const item = button.closest(".colItem")
+                const nombreProducto = item.querySelector(".nameProduct").textContent;
+                const precioProducto = item.querySelector(".price").textContent;
+                const thumbnailUrl = item.querySelector(".imagenCard").src;
+                addItemToShopingCart(nombreProducto,precioProducto, thumbnailUrl )
+            }
+            
+            function addItemToShopingCart(nombreProducto,precioProducto, thumbnailUrl) {
+               $(".tablee").append(`<tr id="tableCart">
 
-                console.log(thumbnailUrl)
+                <th scope="row"><img class="shopingCartImagen" src="${thumbnailUrl}" alt=""></th> 
 
-                $(".removeCarrito").click(function () {
-
-                    $("#tableCart").fadeOut('slow')
-                })
-
-            });
-
-            //CUIDADO, AGREGUÉ IMAGEN ESTATICA 
-
-            class AddCart {
-                AddShopingCart(productos) {
-
-                    $(".tablee").append(`<tr id="tableCart">
-
-                <th scope="row"><img class="shopingCartImagen" src="/img/Perifericos/auris1.jpg" alt=""></th> 
-
-                <td class="shopingCartParrafo">${productos.nombreProducto}</td>
+                <td class="shopingCartParrafo">${nombreProducto}</td>
 
                 <td><input type="number" class="form-control mb-3" id="shoppingCartCantidad" value="1"></td>
 
-                <td><p class="p-3 price2">${productos.precioProducto}</p>  </td>
-                <td> <button class="removeCarrito"> <i class="fas fa-trash-alt"></i> </button> </td>
+                <td><p class="p-3 price2">${precioProducto}</p>  </td>
 
+                <td> <button class="removeCarrito"> <i class="fas fa-trash-alt"></i> </button> </td>
 
                 </tr>`)
 
-                }
+                 deleteProduct()
+            }   
+
+            //ELIMINAR PRODUCTO
+
+            function deleteProduct(){
+                $( ".removeCarrito" ).on( "click",function() {
+                 $(".tablee").fadeOut("slow");
+                });
             }
 
         }
+        
+        
     }
+    
 }
 
 
-
-// VARIABLES DATOS - LLAMADO A LOS IMPUTS PARA ADMINISTADOR 
-const nombreProducto = document.querySelector(".nameProduct")
-const precioProducto = document.querySelector(".price")
-const thumbnailUrl = document.querySelector(".imagenCard")
-//const categoriaProducto = document.querySelector("categoriaProducto") 
 
 
 // CONSTRUCTOR
@@ -96,10 +101,6 @@ class Product {
 
     }
 }
-
-
-
-
 
 // CLASS UI - CARD DINAMICA
 
@@ -143,14 +144,8 @@ class UI {
         setTimeout(function () {
             document.querySelector('.alert').remove();
         }, 3000)
-
-
-
     }
 }
-
-
-
 
 //CLICK BOTON SUBIR - LLAMA A LOS IMPUTS ADMINISTRADOR
 
@@ -218,7 +213,7 @@ document.getElementById("loguearme").addEventListener("click", function () {
 })
 
 
-// SHOPPING CART CLICK
+
 
 
 
