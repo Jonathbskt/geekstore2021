@@ -33,7 +33,7 @@
   },
   {
     "id":5,
-    "nombreProducto": "Geforce 2080",
+    "nombreProducto": "Nvidia RTX Geforce 2080",
     "precioProducto": 150560,
     "categoria" : "Componentes",
     "categoriaProducto": "Placas de video",

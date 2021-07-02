@@ -138,6 +138,7 @@ p {
 
 .card {
   border-radius: 15px;
+  padding: 0px;
   transition: all 0.3s ease-out;
 }
 
@@ -146,6 +147,8 @@ p {
 }
 
 .card-body {
+  border-top-left-radius: 15px;
+  border-top-right-radius: 15px;
   border-bottom-left-radius: 15px;
   border-bottom-right-radius: 15px;
 }
@@ -153,6 +156,7 @@ p {
 .addCarrito a {
   background: #333333;
   width: 40px;
+  transition: all 0.3s ease-out;
   color: #ffc821;
   position: absolute;
   height: 40px;
@@ -300,5 +304,10 @@ p {
 .listado {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
-  grid-gap: 15px;
+  grid-gap: 20px;
+}
+
+.card img {
+  width: 100%;
+  height: auto;
 }

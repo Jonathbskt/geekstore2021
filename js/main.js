@@ -20,21 +20,20 @@ window.onload = function () {
 
             let datosProducts = JSON.parse(this.responseText);
             for (const productos of datosProducts) {
-                $("#listadoProduct").append(`<div class="col colItem">
-                        <div class="card h-100">
+                $("#listadoProduct").append(`
+                        <div class="card h-100 col colItem">
                             
                             <img src="${productos.thumbnailUrl}" class="card-img-top imagenCard" alt="...">
                             <div class="card-body bg-light">
                                 <h5 class="card-title nameProduct" > ${productos.nombreProducto}</h5>
                                 <p class="price"> $${productos.precioProducto}</p>
                                 <p class="idProduct d-none"> ${productos.id}</p>
-
                                 <div class="addCarrito ">
                                     <a href="#" class="shopingCartClick"> <i class="fas fa-shopping-cart"></i></a>
                                 </div>
                             </div>
                         </div>
-                    </div> `);
+                    `);
                     
             }
 
@@ -88,6 +87,7 @@ window.onload = function () {
         
     }
 }
+
 //FUNCIÓN BÚSQUEDA DINAMICA
 
 function searchFilters(input,selector) {
