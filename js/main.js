@@ -2,6 +2,7 @@
 const nombreProducto = document.querySelector(".nameProduct")
 const precioProducto = document.querySelector(".price")
 const thumbnailUrl = document.querySelector(".imagenCard")
+
 //const categoriaProducto = document.querySelector("categoriaProducto") 
 
 //DATOS 
@@ -26,13 +27,15 @@ window.onload = function () {
                             <div class="card-body bg-light">
                                 <h5 class="card-title nameProduct" > ${productos.nombreProducto}</h5>
                                 <p class="price"> $${productos.precioProducto}</p>
-                                
+                                <p class="idProduct d-none"> ${productos.id}</p>
+
                                 <div class="addCarrito ">
-                                    <a href="#" class="shopingCartClick"  > <i class="fas fa-shopping-cart"></i></a>
+                                    <a href="#" class="shopingCartClick"> <i class="fas fa-shopping-cart"></i></a>
                                 </div>
                             </div>
                         </div>
                     </div> `);
+                    
             }
 
             // SHOPPING CART CLICK - AGREGAR AL CARRITO 
@@ -49,10 +52,13 @@ window.onload = function () {
                 const nombreProducto = item.querySelector(".nameProduct").textContent;
                 const precioProducto = item.querySelector(".price").textContent;
                 const thumbnailUrl = item.querySelector(".imagenCard").src;
-                addItemToShopingCart(nombreProducto,precioProducto, thumbnailUrl )
+                const idProduct = item.querySelector(".idProduct").textContent;
+
+               
+                addItemToShopingCart(nombreProducto,precioProducto, thumbnailUrl,idProduct )
             }
             
-            function addItemToShopingCart(nombreProducto,precioProducto, thumbnailUrl) {
+            function addItemToShopingCart(nombreProducto,precioProducto, thumbnailUrl,idProduct) {
                $(".tablee").append(`<tr id="tableCart">
 
                 <th scope="row"><img class="shopingCartImagen" src="${thumbnailUrl}" alt=""></th> 
@@ -62,33 +68,43 @@ window.onload = function () {
                 <td><input type="number" class="form-control mb-3" id="shoppingCartCantidad" value="1"></td>
 
                 <td><p class="p-3 price2">${precioProducto}</p>  </td>
-
-                <td> <button class="removeCarrito"> <i class="fas fa-trash-alt"></i> </button> </td>
+                <td> <button class="removeCarrito" id="removeCarrito${idProduct}"> <i class="fas fa-trash-alt"></i> </button> </td>
 
                 </tr>`)
 
-                 deleteProduct()
+                deleteProduct(idProduct);
             }   
-
-            //ELIMINAR PRODUCTO
-
-            function deleteProduct(){
-                $( ".removeCarrito" ).on( "click",function() {
-                 $(".tablee").fadeOut("slow");
-                });
-            }
-
+            
+            function deleteProduct(value){
+                $("#removeCarrito").on( "click",function() {
+                 $("#tableCart").fadeOut("slow");
+                 console.log(value);
+                }) }
+            
+            searchFilters(".card-filter", ".card");
+            
         }
         
         
     }
-    
 }
+//FUNCIÓN BÚSQUEDA DINAMICA
 
+function searchFilters(input,selector) {
+    document.addEventListener("keyup", (e) => {
+        if (e.target.matches(input)) {
 
+        console.log(e.target.value)
+        document.querySelectorAll(selector).forEach((el) => {
+            el.textContent.toLowerCase().includes(e.target.value.toLowerCase())
+            ?el.classList.remove("filter")
+            :el.classList.add("filter");
+        });
+        }
+    });
+    }
 
-
-// CONSTRUCTOR
+// CONSTRUCTOR ADMIN
 
 class Product {
     constructor(nombreProducto, precioProducto, categoriaProducto, categoria, thumbnailUrl) {
@@ -125,8 +141,6 @@ class UI {
 
         productList.appendChild(element);
         this.resetForm();
-
-
     }
 
     resetForm() {
@@ -154,7 +168,6 @@ document.getElementById('product-form').addEventListener('submit', function (eve
     let nombreProducto = document.getElementById("nombreProducto").value
     let precioProducto = document.getElementById("precioProducto").value
     let categoriaProducto = document.getElementById("categoriaProducto").value
-
     const product = new Product(nombreProducto, precioProducto, categoriaProducto);
     const ui = new UI();
 
@@ -163,18 +176,12 @@ document.getElementById('product-form').addEventListener('submit', function (eve
     }
 
     ui.agregarProducto(product);
-
-
     ui.showMessage('Producto agregado satisfactoriamente', 'alert alert-success');
-
     sessionStorage.setItem("product", JSON.stringify(product));
-
-
 }
 )
 
 // VALIDACIÓN DE LOGIN
-
 
 let administrador = "jonatanbelfiore@outlook.com"
 let passwordAdmin = "jonatanbelfiore"
@@ -211,12 +218,3 @@ document.getElementById("loguearme").addEventListener("click", function () {
 
 
 })
-
-
-
-
-
-
-
-
-

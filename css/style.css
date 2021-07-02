@@ -138,6 +138,7 @@ p {
 
 .card {
   border-radius: 15px;
+  transition: all 0.3s ease-out;
 }
 
 .card img {
@@ -288,4 +289,16 @@ p {
 
 .offcanvas-header {
   padding: 1rem 1rem 0rem 1rem;
+}
+
+.filter {
+  visibility: hidden;
+  opacity: 0;
+  order: 1;
+}
+
+.listado {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+  grid-gap: 15px;
 }
