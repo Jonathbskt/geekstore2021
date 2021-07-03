@@ -33,11 +33,34 @@
   },
   {
     "id":5,
-    "nombreProducto": "Nvidia RTX Geforce 2080",
+    "nombreProducto": "Asus Radeon RX 6700 XT Dual Gaming 12GB",
     "precioProducto": 150560,
     "categoria" : "Componentes",
     "categoriaProducto": "Placas de video",
-    "thumbnailUrl": "./img/Componentes/geforce.jpg"
+    "thumbnailUrl": "img/Componentes/1620314100_descarga.png"
+  },
+  {
+    "id":6,
+    "nombreProducto": "Gabinete Gigabyte C200G TG ATXBlack ",
+    "precioProducto": 10000,
+    "categoria" : "Componentes",
+    "categoriaProducto": "Gabinete",
+    "thumbnailUrl": "img/Componentes/1620767512_gigabyte-c200-glass-1.jpg"
+  },
+  {
+    "id":7,
+    "nombreProducto": "Notebook Ideapad L340 17Pulgadas Gaming Hero ",
+    "precioProducto": 130000,
+    "categoria" : "Notebooks",
+    "categoriaProducto": "Ideapad",
+    "thumbnailUrl": "img/Perifericos/02_Ideapad_L340_17Inch_Gaming_Hero_Front_Facing_Left-1280x720.jpg"
+  },
+  {
+    "id":8,
+    "nombreProducto": "Microprocesador AMD Ryzen 7 3700x 4.4ghz",
+    "precioProducto": 130000,
+    "categoria" : "Componentes",
+    "categoriaProducto": "Microprocesadores",
+    "thumbnailUrl": "img/Componentes/1602255318_microprocesadoramdryzen73700x4.4ghzwraithprismrgb.jpg"
   }
-
 ]

@@ -83,8 +83,6 @@ window.onload = function () {
             searchFilters(".card-filter", ".card");
             
         }
-        
-        
     }
 }
 
