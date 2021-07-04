@@ -63,7 +63,6 @@ p {
   margin-bottom: 50px;
   background: #f8f9fa;
   font-family: "Montserrat", sans-serif;
-  height: 600px;
   border-radius: 20px;
 }
 
@@ -85,7 +84,7 @@ p {
   font-size: 20px;
   text-transform: uppercase;
   color: #ffc821;
-  background: #333333;
+  background: #000000;
   border-top-left-radius: 20px;
   border-top-right-radius: 20px;
 }
@@ -310,4 +309,8 @@ p {
 .card img {
   width: 100%;
   height: auto;
+}
+
+.accordion-item {
+  border: none;
 }
